@@ -13,10 +13,10 @@ pipenv install --sequential
 
 ## Usage
 
-1. Create a folder in the home directory named Data. In here, place all your Fitbit data
-2. Run from main.py
+### Getting a Fitbit API Token
 
-## Obtaining Fitbit Data
+To do this, you must have made a Fitbit dev account and have created your own app
+Check this out: http://shishu.info/2016/06/how-to-download-your-fitbit-second-level-data-without-coding/
 
 1. Open https://dev.fitbit.com/apps/
 2. Application "Getting Heart Rate Intraday"
@@ -25,7 +25,22 @@ pipenv install --sequential
 5. Copy the part after the # in the URL (access_token=xxxxxxxx)
 6. Paste into "Parse response"
 7. Copy token
-8. Re-place expired token in HeartRatePuller.py
+8. Paste token in main.py (Replacing the old expired token)
+
+### Getting data from Fitbit API
+
+In main.py:
+1. enter a date range
+2. uncomment the section on querying the fitbit API
+3. Run main.py
+
+### Analysing Data
+
+In main.py
+1. Comment-out the section on querying the fitbit API
+2. Make calls to whatever analyse functions you want
+
 
 ## Reference
 https://dev.fitbit.com/build/reference/web-api/sleep-v1/
+

@@ -3,7 +3,7 @@ main.py
 """
 
 import pandas as pd
-from src.analysers.sleep_analyser import analyse_sleep_data
+from src.analysers import sleep_analyser, heart_rate_analyser
 from src.utilities.utilities import write_to_master
 from src.utilities.puller import get_fitbit_data
 
@@ -23,5 +23,6 @@ if __name__ == "__main__":
     #     print(e)
     # write_to_master("HR")
 
-    analyse_sleep_data()
+    # sleep_analyser.analyse_sleep_data()
+    heart_rate_analyser.analyse_heart_rate()
 

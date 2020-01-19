@@ -1,3 +1,9 @@
+"""!
+All functions required for obtaining Fitbit data through the API
+
+Note: Fitbit has placed a limit of 150 requests per hour.
+"""
+
 import requests
 import os
 import json
