@@ -25,7 +25,7 @@ Check this out: http://shishu.info/2016/06/how-to-download-your-fitbit-second-le
 5. Copy the part after the # in the URL (access_token=xxxxxxxx)
 6. Paste into "Parse response"
 7. Copy token
-8. Paste token in main.py (Replacing the old expired token)
+8. Paste token into token.txt found in the main directory (if file doesn't exist, make it)
 
 ### Getting data from Fitbit API
 

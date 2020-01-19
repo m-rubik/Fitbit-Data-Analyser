@@ -3,7 +3,7 @@ from src.plot.plot_sleep import plot_sleep_cycles, plot_time_spent_in_bed, plot_
 import regex as re
 
 def analyse_sleep_data():
-    masterText = read_from_file('Sleep/Master.txt')
+    masterText = read_from_file('./Data/Sleep/Master.txt')
 
     cycleInfoCheck = re.compile(r"(\"timeInBed\").*?([0-9]+).*?(\"deep\").*?([0-9]+).*?(\"light\").*?([0-9]+).*?(\"rem\").*?([0-9]+).*?(\"wake\").*?([0-9]+).*?(\"totalMinutesAsleep\").*?([0-9]+)",re.MULTILINE)
     cycleInfo = cycleInfoCheck.findall(masterText)

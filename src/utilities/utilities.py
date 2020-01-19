@@ -15,14 +15,13 @@ def write_to_master(category):
     except Exception as e:
         print(e)
 
-def read_from_file(filename):
+def read_from_file(filepath):
     try:
-        filepath = './Data/'+filename
         if os.path.exists(filepath):
             text =''
             for line in open(filepath,"r", encoding='utf-8'):
                 text += line
-            print('Reading from',filename,'complete.')
+            print('Reading from', filepath, 'complete.')
             return text
         else:
             raise Exception("Path to file cannot be found.")

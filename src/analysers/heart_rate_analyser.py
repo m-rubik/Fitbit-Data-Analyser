@@ -9,7 +9,7 @@ from src.plot.plot_heart_rate import plot_average_BMP
 
 def analyse_heart_rate():
         
-    masterText = read_from_file('HR/Master.txt')
+    masterText = read_from_file('./Data/HR/Master.txt')
 
     masterCheck = re.compile(r"(\"time\": \")([0-9]+:[0-9]+:[0-9]+)(.*?)(\"value\": )([0-9]+)",re.MULTILINE)
     masterData = masterCheck.findall(masterText)
