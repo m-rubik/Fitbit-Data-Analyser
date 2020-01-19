@@ -33,10 +33,8 @@ def analyse_sleep_data():
     # sleepInfoCheck = re.compile(r"(\"dateTime\").*?([0-9]{2}:[0-9]{2}:[0-9]{2}).*?(\"value\").*?([1-3])",re.MULTILINE)
     # sleepInfo = sleepInfoCheck.findall(masterText)
 
-    # plot_sleep.plot_duration(realbasicInfo)
+    plot_sleep.plot_duration(realbasicInfo)
     plot_sleep.plot_efficiency(realbasicInfo)
-    
-
-    # plot_sleep.plot_awakenings(realbasicInfo)
-    # plot_sleep.plot_sleep_cycles(cycleInfo)
-    # plot_sleep.plot_time_spent_in_bed(cycleInfo)
+    plot_sleep.plot_awakenings(realbasicInfo)
+    plot_sleep.plot_sleep_cycles(cycleInfo)
+    plot_sleep.plot_time_spent_in_bed(cycleInfo)
