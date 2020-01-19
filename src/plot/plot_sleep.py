@@ -3,7 +3,7 @@ import statistics
 import matplotlib.pyplot as plt
 
 
-def plotCycles(cycleInfo):
+def plot_sleep_cycles(cycleInfo):
     first_date = datetime.date(2018,1,1)
     last_date = datetime.date(2018,12,31)
 

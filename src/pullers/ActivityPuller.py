@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 25 14:24:47 2018
+Created on Fri Jan 20:08:51 2019
 
 @author: Mason
 
 Notes:
-- To re-generate access token view HowTo.txt
+- To re-generate access token view README
 - Fitbit limit 150 request per hour, so watch for this!
 """
 
@@ -23,13 +23,13 @@ import operator
 def getData(date,token):
     try:
         date = date.strftime('%Y-%m-%d')
-        url = 'https://api.fitbit.com/1/user/-/activities/heart/date/' + date + '/1d/1sec/time/00:00/23:59.json'
-        filename = 'HRdata' + date + '.json'
+        url = 'https://api.fitbit.com/1/user/-/activities/date/' + date + '.json'
+        filename = 'ActivityData' + date + '.json'
         info = requests.get(url=url, headers={'Authorization':'Bearer ' + token})
         data = info.json()
 
         # Uncomment to see raw data from request
-        # print(r)
+        # print(data)
 
         filepath = './Data/' + filename
 
@@ -58,7 +58,7 @@ def writeToMaster():
     except Exception as e:
         print(e)
 
-def readFromFile(filename):
+def read_from_file(filename):
     try:
         filepath = './Data/'+filename
         if os.path.exists(filepath):
@@ -77,8 +77,8 @@ if __name__ == '__main__':
     # access fitbit developper API access token
     token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMkNUOFIiLCJzdWIiOiI2ODNTM04iLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJhY3QgcnNldCBybG9jIHJ3ZWkgcmhyIHJwcm8gcm51dCByc2xlIiwiZXhwIjoxNTQ4NDczMjU2LCJpYXQiOjE1NDc4Njg0NTZ9.bM7RtwsZl0veBJN4EMcWjs1_uEfR6fT9enWmsuQwVV8'
     
-    start_date = '2018-01-06'
-    end_date = '2018-01-11'
+    start_date = '2018-11-07'
+    end_date = '2018-12-31'
     dates = pd.date_range(start = pd.to_datetime(start_date), end = pd.to_datetime(end_date)).tolist()
 
     ## GET ALL DATA AND STORE ON A DAY-TO-DAY BASIS
@@ -92,49 +92,10 @@ if __name__ == '__main__':
     writeToMaster()
 
     ## READ FROM A SPECIFIED FILE
-    # masterText = readFromFile('HRdata2018-10-15.json')
-    masterText = readFromFile('Master.txt')
+    # masterText = read_from_file('HRdata2018-10-15.json')
+    masterText = read_from_file('Master.txt')
 
-    masterCheck = re.compile(r"(\"time\": \")([0-9]+:[0-9]+:[0-9]+)(.*?)(\"value\": )([0-9]+)",re.MULTILINE)
-    masterData = masterCheck.findall(masterText)
+    basicInfoCheck = re.compile(r"{\"(activity).*?(total).*?(distance)\": ([0-9]+.[0-9]+).*?(elevation)\": ([0-9]+.[0-9]+).*?(floors)\": ([0-9]+).*?(restingHeartRate)\": ([0-9]+).*?(sedentaryMinutes)\": ([0-9]+).*?(steps)\": ([0-9]+)",re.MULTILINE)
+    basicInfo = basicInfoCheck.findall(masterText)
 
-    times = pd.date_range("00:00", "23:59", freq="1S").time
-
-    timeDict = {}
-    dataDict = {}
-    timeList = list()
-    for ts in times:
-        timeDict[ts.strftime('%H:%M:%S')] = list()
-        dataDict[ts.strftime('%H:%M:%S')] = 0
-        timeList.append(ts.strftime("%H:%M:%S"))
-
-    print('Data points to organize:',len(masterData))
-    for data in masterData:
-        value = timeDict.get(data[1])
-        value.append(int(data[4]))
-    print('Data points organized.')
-    
-
-    for time, values in timeDict.items():
-        if values:
-            dataDict[time]=statistics.mean(values)
-    
-    sortedDataDict = sorted(dataDict.items(), key=operator.itemgetter(0))
-    x, y = zip(*sortedDataDict)
-
-    plt.figure(1) 
-    plt.plot(y,'r')
-    plt.title("Average daily BPM", fontsize=18)
-
-    locs, labels = plt.xticks()           # Get locations and labels
-    #plt.xticks(np.arange(0,len(timeList)),timeList, rotation=90)  # Set locations and labels
-
-    ax = plt.gca()
-    ax.set_xlabel('Time (seconds)', fontsize=18)
-    ax.set_ylabel('BPM', fontsize=18)
-
-    plt.show()
-
-
-
-    
+    print(0)

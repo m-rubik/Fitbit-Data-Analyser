@@ -22,7 +22,7 @@ import operator
 
 from plotPAA import plotPAA
 from plotSST import plotSST
-from plotCycles import plotCycles
+from plot_sleep_cycles import plot_sleep_cycles
 
 def getData(date,token):
     try:
@@ -62,7 +62,7 @@ def writeToMaster():
     except Exception as e:
         print(e)
 
-def readFromFile(filename):
+def read_from_file(filename):
     try:
         filepath = './Data/'+filename
         if os.path.exists(filepath):
@@ -79,7 +79,7 @@ def readFromFile(filename):
 if __name__ == '__main__':
 
     # access fitbit developper API access token
-    token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMkNUOFIiLCJzdWIiOiI2ODNTM04iLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyaHIgcnNsZSIsImV4cCI6MTU0NzI2MDMwMywiaWF0IjoxNTQ2NjU1NTAzfQ.ylGS1Lae259Bk2wzgNfn_hUYAdM9AtkD8cQWyoNOwks'
+    token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMkNUOFIiLCJzdWIiOiI2ODNTM04iLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJhY3QgcnNldCBybG9jIHJ3ZWkgcmhyIHJudXQgcnBybyByc2xlIiwiZXhwIjoxNTgwMDYwNzM4LCJpYXQiOjE1Nzk0NTU5Mzh9.K5II2pzOXNiH5CsLb8lDRKv19Rl0UhuwiPuHBWHBPvQ&user_id=683S3N&scope=sleep+nutrition+activity+profile+social+location+settings+heartrate+weight&token_type=Bearer&expires_in=604800'
     
     start_date = '2018-10-10'
     end_date = '2018-12-31'
@@ -96,8 +96,8 @@ if __name__ == '__main__':
     # writeToMaster()
 
     ## READ FROM A SPECIFIED FILE
-    # masterText = readFromFile('HRdata2018-10-15.json')
-    masterText = readFromFile('Master.txt')
+    # masterText = read_from_file('HRdata2018-10-15.json')
+    masterText = read_from_file('Sleep/Master.txt')
 
     basicInfoCheck = re.compile(r"(\"awakeningsCount\").*?([0-9]+).*?(\"duration\").*?([0-9]+).*?(\"efficiency\").*?([0-9]+).*?(\"endTime\").*?([0-9]+-[0-9]+-[0-9]+[A-z]{1})([0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]+).*?(\"isMainSleep\").*?([A-z]{4,5})",re.MULTILINE)
     basicInfo = basicInfoCheck.findall(masterText)
@@ -126,6 +126,6 @@ if __name__ == '__main__':
     # sleepInfo = sleepInfoCheck.findall(masterText)
 
     # plotPAA(cycleInfo)
-    plotCycles(cycleInfo)
+    plot_sleep_cycles(cycleInfo)
 
     print(0)
