@@ -24,6 +24,6 @@ if __name__ == "__main__":
     #     print(e)
     # write_to_master("HR")
 
-    # sleep_analyser.analyse_sleep_data()
+    sleep_analyser.analyse_sleep_data()
     # heart_rate_analyser.analyse_heart_rate()
 

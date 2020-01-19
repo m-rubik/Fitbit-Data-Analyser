@@ -161,3 +161,67 @@ def plot_awakenings(realbasicInfo):
     plt.yticks(fontsize=14, color=textColor)
 
     plt.show()
+
+def plot_duration(realbasicInfo):
+    ax = plt.gca()
+    fig = plt.gcf()
+    ax.set_facecolor(backgroundColor)
+    fig.patch.set_facecolor(figColor)
+
+    duration_data = []
+    for real_basic_info in realbasicInfo:
+        duration_data.append(int(real_basic_info[3])/3600000)
+
+    plt.plot(duration_data, marker="o",color=markerColor,linestyle = 'None')
+    mean_duration = statistics.mean(duration_data)
+    plt.axhline(y=mean_duration, color=meanColor, linestyle='--')
+
+    fig.canvas.set_window_title('Sleep Duration')
+    plt.title('Sleep Duration', fontsize=18, color=textColor)
+
+    props = dict(boxstyle='round', facecolor=meanColor, alpha=0.5)
+    dataString = '\n'.join((
+        ("Highest: "+str(round(max(duration_data), 2))),
+        ("Lowest: "+str(round(min(duration_data), 2))),
+        ("Mean: "+str(round(mean_duration, 2)))))
+    # place a text box in upper left in axes coords
+    ax.text(0.05, 0.95, dataString, transform=ax.transAxes, fontsize=14,
+            verticalalignment='top', bbox=props)
+
+    # ax.legend(['Awakenings', 'Average'])
+    plt.xticks(fontsize=14, color=textColor)
+    plt.yticks(fontsize=14, color=textColor)
+
+    plt.show()
+
+def plot_efficiency(realbasicInfo):
+    ax = plt.gca()
+    fig = plt.gcf()
+    ax.set_facecolor(backgroundColor)
+    fig.patch.set_facecolor(figColor)
+
+    duration_data = []
+    for real_basic_info in realbasicInfo:
+        duration_data.append(int(real_basic_info[5]))
+
+    plt.plot(duration_data, marker="o",color=markerColor,linestyle = 'None')
+    mean_duration = statistics.mean(duration_data)
+    plt.axhline(y=mean_duration, color=meanColor, linestyle='--')
+
+    fig.canvas.set_window_title('Sleep Efficiency')
+    plt.title('Sleep Efficiency', fontsize=18, color=textColor)
+
+    props = dict(boxstyle='round', facecolor=meanColor, alpha=0.5)
+    dataString = '\n'.join((
+        ("Highest: "+str(round(max(duration_data), 2)) + "%"),
+        ("Lowest: "+str(round(min(duration_data), 2)) + "%"),
+        ("Mean: "+str(round(mean_duration, 2)) + "%")))
+    # place a text box in upper left in axes coords
+    ax.text(0.05, 0.95, dataString, transform=ax.transAxes, fontsize=14,
+            verticalalignment='top', bbox=props)
+
+    # ax.legend(['Awakenings', 'Average'])
+    plt.xticks(fontsize=14, color=textColor)
+    plt.yticks(fontsize=14, color=textColor)
+
+    plt.show()
